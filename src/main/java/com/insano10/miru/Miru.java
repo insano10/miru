@@ -13,7 +13,7 @@ public class Miru
 {
     public static void main(String[] args) throws Exception
     {
-        System.out.println("Starting Miru server");
+        System.out.println("Starting Miru server on http://localhost:8080");
 
         Container container = new MiruServer();
         Server server = new ContainerServer(container);
