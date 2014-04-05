@@ -15,9 +15,21 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.simpleframework</groupId>
-            <artifactId>simple</artifactId>
-            <version>5.1.6</version>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>9.1.3.v20140225</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlet</artifactId>
+            <version>9.1.3.v20140225</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-webapp</artifactId>
+            <version>9.1.3.v20140225</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -40,11 +52,9 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <configuration>
-                    <mainClass>com.insano10.miru.Miru</mainClass>
-                </configuration>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty-plugin</artifactId>
+                <version>6.1.26</version>
             </plugin>
         </plugins>
     </build>

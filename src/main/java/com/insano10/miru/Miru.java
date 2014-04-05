@@ -1,13 +1,7 @@
 package com.insano10.miru;
 
-import org.simpleframework.http.core.Container;
-import org.simpleframework.http.core.ContainerServer;
-import org.simpleframework.transport.Server;
-import org.simpleframework.transport.connect.Connection;
-import org.simpleframework.transport.connect.SocketConnection;
-
-import java.net.InetSocketAddress;
-import java.net.SocketAddress;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.webapp.WebAppContext;
 
 public class Miru
 {
@@ -15,11 +9,15 @@ public class Miru
     {
         System.out.println("Starting Miru server on http://localhost:8080");
 
-        Container container = new MiruServer();
-        Server server = new ContainerServer(container);
-        Connection connection = new SocketConnection(server);
-        SocketAddress address = new InetSocketAddress(8080);
+        Server server = new org.eclipse.jetty.server.Server(8080);
 
-        connection.connect(address);
+        WebAppContext webContext = new WebAppContext();
+        webContext.setResourceBase("/home/jenny/IdeaProjects/miru/src/web");
+        webContext.setContextPath("/");
+        webContext.setParentLoaderPriority(true);
+        server.setHandler(webContext);
+
+        server.start();
+        server.join();
     }
 }

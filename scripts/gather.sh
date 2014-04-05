@@ -17,7 +17,7 @@ classpath="${root}/lib/*"
 buildDir="build"
 mainClass="com/lmax/dojo/romanNumerals/RomanNumeralConverter"
 dataFolder="data"
-dataFile="${dataFolder}/${projectName}"
+dataFile="${dataFolder}/${projectName}.csv"
 
 sourceCompile=0
 testCompile=0
