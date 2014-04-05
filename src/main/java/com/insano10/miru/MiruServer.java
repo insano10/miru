@@ -3,7 +3,7 @@ package com.insano10.miru;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 
-public class Miru
+public class MiruServer
 {
     public static void main(String[] args) throws Exception
     {

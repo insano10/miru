@@ -6,7 +6,7 @@
         version="2.5">
     <servlet>
         <servlet-name>Stats</servlet-name>
-        <servlet-class>com.insano10.miru.StatsServlet</servlet-class>
+        <servlet-class>com.insano10.miru.servlets.StatsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Stats</servlet-name>

@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
-public class MiruTest
+public class MiruServerTest
 {
     @Test
     public void shouldTest()

@@ -1,4 +1,4 @@
-package com.insano10.miru;
+package com.insano10.miru.servlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
