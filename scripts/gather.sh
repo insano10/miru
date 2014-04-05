@@ -9,9 +9,38 @@ function result()
    fi
 }
 
-echo "Using properties file $1"
-# source the properties
-. $1
+function usage()
+{
+	echo "Usage: $0 <path to miru.properties>"
+	exit 1
+}
+
+function sourceProperties()
+{
+    propertyFilePath=$1
+
+    if [ ! -f $propertyFilePath ]; then
+        echo "Cannot find $propertyFilePath"
+        exit 1
+    fi
+
+    echo "Using properties file $1"
+    . $1
+
+    echo "projectName=$projectName"
+    echo "sources=$sources"
+    echo "tests=$tests"
+    echo "classpath=$classpath"
+    echo ""
+}
+
+
+if [ "$#" -ne 1 ]; then
+    usage
+fi
+
+sourceProperties $1
+
 
 #location config
 buildDir="build"
