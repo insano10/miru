@@ -1,5 +1,6 @@
 package com.insano10.miru.servlets;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,12 +11,11 @@ import java.util.Scanner;
 
 public class StatsServlet extends HttpServlet
 {
-    private final String dataFileFolder = "/home/jenny/IdeaProjects/miru/data";
-    private final String dataFile = dataFileFolder + "/romanNumerals.csv";
+    private static final String DATAFILE = "data/romanNumerals.csv";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        final File statsFile = new File(dataFile);
+        final File statsFile = new File(DATAFILE);
         final Scanner fileReader = new Scanner(statsFile);
 
         while(fileReader.hasNextLine())
@@ -26,5 +26,10 @@ public class StatsServlet extends HttpServlet
 
         response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);
+    }
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
     }
 }
