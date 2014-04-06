@@ -1,7 +1,7 @@
 #!/bin/sh
 
-#start gathering
+#start gathering (once, need to put in a loop)
 ./gather/scripts/gather.sh properties/miru.properties
 
-#start webapp
-java -jar web/miru-web.jar
+#start webapp (need to put in background
+java -jar web/jetty-runner.jar web/miru-web.war

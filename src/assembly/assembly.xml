@@ -17,11 +17,15 @@
         <file>
             <source>${project.build.directory}/${artifactId}-${version}.${packaging}</source>
             <outputDirectory>web</outputDirectory>
-            <destName>miru-web.jar</destName>
+            <destName>miru-web.war</destName>
         </file>
         <file>
             <source>${project.basedir}/src/main/resources/miru.properties</source>
             <outputDirectory>properties</outputDirectory>
+        </file>
+        <file>
+            <source>${project.basedir}/lib/jetty-runner.jar</source>
+            <outputDirectory>web</outputDirectory>
         </file>
     </files>
     <fileSets>
