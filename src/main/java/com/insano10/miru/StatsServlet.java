@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -37,6 +38,7 @@ public class StatsServlet extends HttpServlet
             }
         }
 
+        Collections.sort(stats);
         response.getWriter().println(gson.toJson(stats));
         response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);

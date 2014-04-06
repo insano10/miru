@@ -74,7 +74,7 @@ function saveDataToCSV()
     fi
 
     #append data to project data file
-    echo "$1, $2, $3" >> ${dataFile}
+    echo "$(($(date +%s%N)/1000000)), $1, $2, $3" >> ${dataFile}
 }
 
 function main()
