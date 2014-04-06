@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 function result()
 {
@@ -80,9 +80,6 @@ function saveDataToCSV()
 function main()
 {
     buildDir="build"
-
-    #start in miru root folder
-    cd ..
 
     clean ${buildDir}
     sourceProperties $1
