@@ -54,8 +54,24 @@ function compileTests()
 
 function runTests()
 {
-    find $1 -name "*Test.class" | sed -e "s/.class//; s/$1\///; s/\//./g;" | xargs java -cp "$1:$classpath" org.junit.runner.JUnitCore >/dev/null 2>&1
-    echo $(result)
+    resultStr=$(find $1 -name "*Test.class" | sed -e "s/.class//; s/$1\///; s/\//./g;" | xargs java -cp "$1:$classpath" org.junit.runner.JUnitCore)
+
+    total=0
+    pass=0
+    fail=0
+
+    if [[ ${resultStr} =~ .*OK\ \((.*)\ tests\).* ]]
+    then
+        total=${BASH_REMATCH[1]};
+        pass=${BASH_REMATCH[1]};
+    elif [[ ${resultStr} =~ .*Tests\ run:\ (.*),\ .*Failures:\ (.*) ]]
+    then
+        total=${BASH_REMATCH[1]};
+        fail=${BASH_REMATCH[2]};
+        pass=$((total-fail))
+    fi
+
+    echo "${total} ${pass} ${fail}";
 }
 
 function saveDataToCSV()
@@ -70,11 +86,11 @@ function saveDataToCSV()
 
     #create data file with header if it doesn't exist
     if [ ! -f $dataFile ]; then
-        echo "#CSV format: sourceCompile, testCompile, testRun" > ${dataFile}
+        echo "#CSV format: sourceCompile, testCompile, totalTestsRun, totalTestsPass, totalTestsFail" > ${dataFile}
     fi
 
-    #append data to project data file
-    echo "$(($(date +%s%N)/1000000)), $1, $2, $3" >> ${dataFile}
+    #append data to project data file (3/4/5 all come from testRun)
+    echo "$(($(date +%s%N)/1000000)), $1, $2, $3, $4, $5" >> ${dataFile}
 }
 
 function main()
