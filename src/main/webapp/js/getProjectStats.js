@@ -7,7 +7,9 @@ function getProjectStats() {
         resultDiv.html("");
         resultDiv.append("Sources compile: " + boolToStringResult(data[0].sourcesCompile) + "<br/>");
         resultDiv.append("Tests compile: " +  boolToStringResult(data[0].testsCompile) + "<br/>");
-        resultDiv.append("Tests pass: " +  boolToStringResult(data[0].testsPass) + "<br/>");
+        resultDiv.append("Tests total: " +  data[0].totalTestsRun + "<br/>");
+        resultDiv.append("Tests passed: " +  data[0].totalTestsPassed + "<br/>");
+        resultDiv.append("Tests failed: " +  data[0].totalTestsFailed + "<br/>");
 
     });
 }
