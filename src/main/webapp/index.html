@@ -7,17 +7,58 @@
     <script src="lib/bootstrap-3.1.1/js/bootstrap.min.js"></script>
 
     <link href="lib/bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <!--<link href="lib/bootstrap-3.1.1/css/grid.css" rel="stylesheet">-->
+    <!--<link href="css/miru.css" rel="stylesheet">-->
 </head>
 <body>
 
 <br/>
-<div class="col-sm-2">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Project Status</h3>
+<div class="row">
+
+    <div class="col-sm-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Project Status</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-8">Sources Compile</div>
+                    <div class="col-md-4 dataCell sourceCompile"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">Tests Compile</div>
+                    <div class="col-md-4 dataCell testCompile"></div>
+                </div>
+            </div>
         </div>
-        <div class="panel-body result"></div>
     </div>
+
+    <div class="col-sm-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Test Breakdown</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-8">Total</div>
+                    <div class="col-md-4 dataCell testTotal"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">Passed</div>
+                    <div class="col-md-4 dataCell testPassed"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">Failed</div>
+                    <div class="col-md-4 dataCell testFailed"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">Ignored</div>
+                    <div class="col-md-4 dataCell testIgnored"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 </body>
