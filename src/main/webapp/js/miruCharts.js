@@ -4,18 +4,41 @@ var options = { animation : false };
 
 function initialiseLineCountChart()
 {
-    var emptyData = createLineCountChartDataStructure([0], [0])
+//    var emptyData = createLineCountChartDataStructure([0], [0])
+//
+//    var canvas = document.getElementById("lineCountChart");
+//    var ctx = canvas.getContext("2d");
+//    lineCountChart = new Chart(ctx);
+//    lineCountChart.Line(emptyData, options);
+    var sourceSeries = { label: "source lines", data : [], shadowSize: 0};
+    var testSeries = { label: "test lines", data : [], shadowSize: 0};
+    var data = [sourceSeries, testSeries];
+    var options = {
+        series: {
+            lines: { show: true },
+            points: { show: false }
+        }
+    };
 
-    var canvas = document.getElementById("lineCountChart");
-    var ctx = canvas.getContext("2d");
-    lineCountChart = new Chart(ctx);
-    lineCountChart.Line(emptyData, options);
+    $("#lineCountChart").plot(data, options);
 }
 
 function updateLineCountChart(sourceDataPointArray, testDataPointArray)
 {
-    var data = createLineCountChartDataStructure(sourceDataPointArray, testDataPointArray);
-    lineCountChart.Line(data, options);
+//    var data = createLineCountChartDataStructure(sourceDataPointArray, testDataPointArray);
+//    lineCountChart.Line(data, options);
+
+    var sourceSeries = { label: "source lines", data : [[1,1],[2,2],[3,3]], shadowSize: 0};
+    var testSeries = { label: "test lines", data : [[1,3],[2,2],[3,1]], shadowSize: 0};
+    var data = [sourceSeries, testSeries];
+    var options = {
+        series: {
+            lines: { show: true },
+            points: { show: false }
+        }
+    };
+
+    $("#lineCountChart").plot(data, options);
 }
 
 function createLineCountChartDataStructure(sourceCountDataPoints, testCountDataPoints)
