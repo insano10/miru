@@ -9,12 +9,15 @@ public class ProjectStats implements Comparable<ProjectStats>
     private int totalTestsPassed;
     private int totalTestsFailed;
     private int totalTestsIgnored;
+    private int sourceLineCount;
+    private int testLineCount;
 
     private ProjectStats()
     {
     }
 
-    public ProjectStats(long timestamp, boolean sourcesCompile, boolean testsCompile, int totalTestsRun, int totalTestsPassed, int totalTestsFailed, int totalTestsIgnored)
+    public ProjectStats(long timestamp, boolean sourcesCompile, boolean testsCompile, int totalTestsRun, int totalTestsPassed, int totalTestsFailed, int totalTestsIgnored,
+                        int sourceLineCount, int testLineCount)
     {
         this.timestamp = timestamp;
         this.sourcesCompile = sourcesCompile;
@@ -23,6 +26,8 @@ public class ProjectStats implements Comparable<ProjectStats>
         this.totalTestsPassed = totalTestsPassed;
         this.totalTestsFailed = totalTestsFailed;
         this.totalTestsIgnored = totalTestsIgnored;
+        this.sourceLineCount = sourceLineCount;
+        this.testLineCount = testLineCount;
     }
 
     public static ProjectStats fromCsvString(final String str)
@@ -35,8 +40,10 @@ public class ProjectStats implements Comparable<ProjectStats>
         int totalTestsPassed = Integer.valueOf(tokens[4].trim());
         int totalTestsFailed = Integer.valueOf(tokens[5].trim());
         int totalTestsIgnored = Integer.valueOf(tokens[6].trim());
+        int sourceLineCount = Integer.valueOf(tokens[7].trim());
+        int testLineCount = Integer.valueOf(tokens[8].trim());
 
-        return new ProjectStats(timestamp, sourcesCompile, testsCompile, totalTestsRun, totalTestsPassed, totalTestsFailed, totalTestsIgnored);
+        return new ProjectStats(timestamp, sourcesCompile, testsCompile, totalTestsRun, totalTestsPassed, totalTestsFailed, totalTestsIgnored, sourceLineCount, testLineCount);
     }
 
     private static boolean intToBool(final String integerString)
@@ -72,6 +79,8 @@ public class ProjectStats implements Comparable<ProjectStats>
                 ", totalTestsPassed=" + totalTestsPassed +
                 ", totalTestsFailed=" + totalTestsFailed +
                 ", totalTestsIgnored=" + totalTestsIgnored +
+                ", sourceLineCount=" + sourceLineCount +
+                ", testLineCount=" + testLineCount +
                 '}';
     }
 
@@ -83,7 +92,9 @@ public class ProjectStats implements Comparable<ProjectStats>
 
         ProjectStats that = (ProjectStats) o;
 
+        if (sourceLineCount != that.sourceLineCount) return false;
         if (sourcesCompile != that.sourcesCompile) return false;
+        if (testLineCount != that.testLineCount) return false;
         if (testsCompile != that.testsCompile) return false;
         if (timestamp != that.timestamp) return false;
         if (totalTestsFailed != that.totalTestsFailed) return false;
@@ -104,6 +115,8 @@ public class ProjectStats implements Comparable<ProjectStats>
         result = 31 * result + totalTestsPassed;
         result = 31 * result + totalTestsFailed;
         result = 31 * result + totalTestsIgnored;
+        result = 31 * result + sourceLineCount;
+        result = 31 * result + testLineCount;
         return result;
     }
 }

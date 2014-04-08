@@ -27,6 +27,9 @@ function getProjectStats() {
             $(".testFailProgress").css("width", (data[0].totalTestsFailed/totalTests)*100 + "%");
         }
 
+        $(".lineCounts").append(data[0].sourceLineCount+"<br/>");
+        $(".lineCounts").append(data[0].testLineCount);
+
     });
 }
 

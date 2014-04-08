@@ -78,6 +78,18 @@ function ignoredTests()
 {
     echo $(grep -r "@Ignore" ${tests} | wc -l);
 }
+
+function countSourceLines()
+{
+    #strip out imports and whitespace lines
+    echo $(find ${sources} -name "*.java" | xargs cat | grep -v "^import" | egrep -v "^[[:space:]]*$|^#" | wc -l)
+}
+
+function countTestLines()
+{
+    echo $(find ${tests} -name "*.java" | xargs cat | grep -v "^import" | egrep -v "^[[:space:]]*$|^#" | wc -l)
+}
+
 function saveDataToCSV()
 {
     dataFolder="data"
@@ -90,11 +102,11 @@ function saveDataToCSV()
 
     #create data file with header if it doesn't exist
     if [ ! -f $dataFile ]; then
-        echo "#CSV format: sourceCompile, testCompile, totalTestsRun, totalTestsPass, totalTestsFail, totalTestsIgnored" > ${dataFile}
+        echo "#CSV format: sourceCompile, testCompile, totalTestsRun, totalTestsPass, totalTestsFail, totalTestsIgnored, sourceLineCount, testLineCount" > ${dataFile}
     fi
 
     #append data to project data file (3/4/5 all come from testRun)
-    echo "$(($(date +%s%N)/1000000)), $1, $2, $3, $4, $5, $6" >> ${dataFile}
+    echo "$(($(date +%s%N)/1000000)), $1, $2, $3, $4, $5, $6, $7, $8" >> ${dataFile}
 }
 
 function main()
@@ -107,8 +119,10 @@ function main()
     testCompile=$(compileTests ${buildDir})
     testsIgnored=$(ignoredTests)
     testRun=$(runTests ${buildDir})
+    sourceLines=$(countSourceLines)
+    testLines=$(countTestLines)
 
-    saveDataToCSV ${sourceCompile} ${testCompile} ${testRun} ${testsIgnored}
+    saveDataToCSV ${sourceCompile} ${testCompile} ${testRun} ${testsIgnored} ${sourceLines} ${testLines}
 
     echo "Results"
     echo "--------"
@@ -116,6 +130,8 @@ function main()
     echo "test compile:   $testCompile"
     echo "tests pass:     $testRun"
     echo "tests ignored:  $testsIgnored"
+    echo "source lines:   $sourceLines"
+    echo "test lines:     $testLines"
 }
 
 if [ "$#" -ne 1 ]; then
