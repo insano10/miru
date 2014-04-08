@@ -30,6 +30,7 @@ function getProjectStats() {
         $(".lineCounts").append(data[0].sourceLineCount+"<br/>");
         $(".lineCounts").append(data[0].testLineCount);
 
+        updateLineCountChart([65,54,30,81,56,55,40], [20,60,42,58,31,21,50]);
     });
 }
 
@@ -44,6 +45,5 @@ function boolToStringResult(boolResult)
         return "FAIL";
     }
 }
-
 
 setInterval(function () { getProjectStats() }, 1000);

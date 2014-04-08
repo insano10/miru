@@ -2,9 +2,11 @@
 <html>
 <head>
     <title>Miru</title>
-    <script src="js/getProjectStats.js"></script>
     <script src="lib/js/jquery-2.1.0.min.js"></script>
+    <script src="lib/js/chart.js"></script>
     <script src="lib/bootstrap-3.1.1/js/bootstrap.min.js"></script>
+    <script src="js/miruCharts.js"></script>
+    <script src="js/getProjectStats.js"></script>
 
     <link href="lib/bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/miru.css" rel="stylesheet">
@@ -66,6 +68,7 @@
 </div>
 <div class="row row-left-border">
     <div class="dataCell lineCounts"></div>
+    <canvas id="lineCountChart" width="400" height="400"></canvas>
 </div>
 
 </body>
