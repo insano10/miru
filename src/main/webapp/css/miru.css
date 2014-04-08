@@ -1,9 +1,14 @@
 .min-height
 {
-    min-height: 320px;
+    min-height: 315px;
 }
 
 .row-left-border
 {
     margin-left: 10px;
+}
+
+.no-top-margin
+{
+    margin-top: 0px;
 }

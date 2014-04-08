@@ -27,10 +27,15 @@ function getProjectStats() {
             $(".testFailProgress").css("width", (data[0].totalTestsFailed/totalTests)*100 + "%");
         }
 
-        $(".lineCounts").append(data[0].sourceLineCount+"<br/>");
-        $(".lineCounts").append(data[0].testLineCount);
-
-        updateLineCountChart([65,54,30,81,56,55,40], [20,60,42,58,31,21,50]);
+        var sourceLineCount = [];
+        var testLineCount = [];
+        //todo: send the array through in json response rather than constructing on client side
+        for(i=0 ; i<data.length ; i++)
+        {
+            sourceLineCount[i] = data[i].sourceLineCount;
+            testLineCount[i] = data[i].testLineCount;
+        }
+        updateLineCountChart(sourceLineCount, testLineCount);
     });
 }
 
