@@ -13,13 +13,18 @@ function getProjectStats() {
             $(".testPassed").append("N/A");
             $(".testFailed").append("N/A");
             $(".testIgnored").append("N/A");
+            $(".testPassProgress").css("width", "0%");
+            $(".testFailProgress").css("width", "0%");
         }
         else
         {
-            $(".testTotal").append(data[0].totalTestsRun);
+            var totalTests = data[0].totalTestsRun + data[0].totalTestsIgnored;
+            $(".testTotal").append(totalTests);
             $(".testPassed").append(data[0].totalTestsPassed);
             $(".testFailed").append(data[0].totalTestsFailed);
             $(".testIgnored").append(data[0].totalTestsIgnored);
+            $(".testPassProgress").css("width", (data[0].totalTestsPassed/totalTests)*100 + "%");
+            $(".testFailProgress").css("width", (data[0].totalTestsFailed/totalTests)*100 + "%");
         }
 
     });

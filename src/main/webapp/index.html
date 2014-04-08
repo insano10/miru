@@ -7,53 +7,57 @@
     <script src="lib/bootstrap-3.1.1/js/bootstrap.min.js"></script>
 
     <link href="lib/bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <!--<link href="lib/bootstrap-3.1.1/css/grid.css" rel="stylesheet">-->
-    <!--<link href="css/miru.css" rel="stylesheet">-->
+    <link href="css/miru.css" rel="stylesheet">
 </head>
 <body>
 
 <br/>
 <div class="row">
 
-    <div class="col-sm-2">
-        <div class="panel panel-default">
+    <div class="col-sm-3">
+        <div class="panel panel-default min-height">
             <div class="panel-heading">
-                <h3 class="panel-title">Project Status</h3>
+                <h2>Project Status</h2>
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-md-8">Sources Compile</div>
-                    <div class="col-md-4 dataCell sourceCompile"></div>
+                    <div class="col-md-8"><h4>Sources Compile</h4></div>
+                    <div class="col-md-4"><h4 class="dataCell sourceCompile"></h4></div>
                 </div>
                 <div class="row">
-                    <div class="col-md-8">Tests Compile</div>
-                    <div class="col-md-4 dataCell testCompile"></div>
+                    <div class="col-md-8"><h4>Tests Compile</h4></div>
+                    <div class="col-md-4"><h4 class="dataCell testCompile"></h4></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="col-sm-2">
-        <div class="panel panel-default">
+    <div class="col-sm-3">
+        <div class="panel panel-default min-height">
             <div class="panel-heading">
-                <h3 class="panel-title">Test Breakdown</h3>
+                <h2>Test Breakdown</h2>
             </div>
             <div class="panel-body">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success testPassProgress"></div>
+                    <div class="progress-bar progress-bar-danger testFailProgress"></div>
+                </div>
+
                 <div class="row">
-                    <div class="col-md-8">Total</div>
-                    <div class="col-md-4 dataCell testTotal"></div>
+                    <div class="col-md-8"><h4>Total</h4></div>
+                    <div class="col-md-4"><h4 class="dataCell testTotal"></h4></div>
                 </div>
                 <div class="row">
-                    <div class="col-md-8">Passed</div>
-                    <div class="col-md-4 dataCell testPassed"></div>
+                    <div class="col-md-8"><h4>Passed</h4></div>
+                    <div class="col-md-4"><h4 class="dataCell testPassed"></h4></div>
                 </div>
                 <div class="row">
-                    <div class="col-md-8">Failed</div>
-                    <div class="col-md-4 dataCell testFailed"></div>
+                    <div class="col-md-8"><h4>Failed</h4></div>
+                    <div class="col-md-4"><h4 class="dataCell testFailed"></h4></div>
                 </div>
                 <div class="row">
-                    <div class="col-md-8">Ignored</div>
-                    <div class="col-md-4 dataCell testIgnored"></div>
+                    <div class="col-md-8"><h4>Ignored</h4></div>
+                    <div class="col-md-4"><h4 class="dataCell testIgnored"></h4></div>
                 </div>
             </div>
         </div>
