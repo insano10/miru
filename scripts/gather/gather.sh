@@ -74,6 +74,10 @@ function runTests()
     echo "${total} ${pass} ${fail}";
 }
 
+function ignoredTests()
+{
+    echo $(grep -r "@Ignore" ${tests} | wc -l);
+}
 function saveDataToCSV()
 {
     dataFolder="data"
@@ -86,11 +90,11 @@ function saveDataToCSV()
 
     #create data file with header if it doesn't exist
     if [ ! -f $dataFile ]; then
-        echo "#CSV format: sourceCompile, testCompile, totalTestsRun, totalTestsPass, totalTestsFail" > ${dataFile}
+        echo "#CSV format: sourceCompile, testCompile, totalTestsRun, totalTestsPass, totalTestsFail, totalTestsIgnored" > ${dataFile}
     fi
 
     #append data to project data file (3/4/5 all come from testRun)
-    echo "$(($(date +%s%N)/1000000)), $1, $2, $3, $4, $5" >> ${dataFile}
+    echo "$(($(date +%s%N)/1000000)), $1, $2, $3, $4, $5, $6" >> ${dataFile}
 }
 
 function main()
@@ -101,15 +105,17 @@ function main()
     sourceProperties $1
     sourceCompile=$(compileSources ${buildDir})
     testCompile=$(compileTests ${buildDir})
+    testsIgnored=$(ignoredTests)
     testRun=$(runTests ${buildDir})
 
-    saveDataToCSV ${sourceCompile} ${testCompile} ${testRun}
+    saveDataToCSV ${sourceCompile} ${testCompile} ${testRun} ${testsIgnored}
 
     echo "Results"
     echo "--------"
     echo "source compile: $sourceCompile"
     echo "test compile:   $testCompile"
     echo "tests pass:     $testRun"
+    echo "tests ignored:  $testsIgnored"
 }
 
 if [ "$#" -ne 1 ]; then

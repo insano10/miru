@@ -18,9 +18,10 @@ public class ProjectStatsTest
     public void shouldConvertObjectToJSON()
     {
         final Gson gson = new GsonBuilder().create();
-        final ProjectStats stats = new ProjectStats(0L, true, true, 9, 7, 2);
+        final ProjectStats stats = new ProjectStats(0L, true, true, 9, 7, 2, 4);
 
-        final String expectedJson = "{\"timestamp\":0,\"sourcesCompile\":true,\"testsCompile\":true,\"totalTestsRun\":9,\"totalTestsPassed\":7,\"totalTestsFailed\":2}";
+        final String expectedJson = "{\"timestamp\":0,\"sourcesCompile\":true,\"testsCompile\":true,\"totalTestsRun\":9," +
+                                     "\"totalTestsPassed\":7,\"totalTestsFailed\":2,\"totalTestsIgnored\":4}";
 
         final String jsonStats = gson.toJson(stats);
         assertThat(jsonStats, equalTo(expectedJson));
@@ -29,9 +30,9 @@ public class ProjectStatsTest
     @Test
     public void shouldCreateFromCorrectlyFormattedString()
     {
-        final String csvString = "12345, 1, 1, 5, 5, 0";
+        final String csvString = "12345, 1, 1, 5, 5, 0, 10";
 
-        final ProjectStats expectedStats = new ProjectStats(12345L, true, true, 5, 5, 0);
+        final ProjectStats expectedStats = new ProjectStats(12345L, true, true, 5, 5, 0, 10);
         final ProjectStats stats = ProjectStats.fromCsvString(csvString);
 
         assertThat(stats, equalTo(expectedStats));
@@ -40,9 +41,9 @@ public class ProjectStatsTest
     @Test public void shouldSortStatsInDescendingOrder()
     {
         final List<ProjectStats> stats = new ArrayList<>();
-        ProjectStats stats1 = new ProjectStats(1L, true, true, 0, 0, 0);
-        ProjectStats stats2 = new ProjectStats(3L, true, true, 0, 0, 0);
-        ProjectStats stats3 = new ProjectStats(2L, true, true, 0, 0, 0);
+        ProjectStats stats1 = new ProjectStats(1L, true, true, 0, 0, 0, 0);
+        ProjectStats stats2 = new ProjectStats(3L, true, true, 0, 0, 0, 0);
+        ProjectStats stats3 = new ProjectStats(2L, true, true, 0, 0, 0, 0);
 
         stats.add(stats1);
         stats.add(stats2);
