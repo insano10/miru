@@ -4,10 +4,10 @@ function getProjectStats() {
     {
         $(".dataCell").html("");
 
-        $(".sourceCompile").append(boolToStringResult(data[0].sourcesCompile));
-        $(".testCompile").append(boolToStringResult(data[0].testsCompile));
+        $(".sourceCompile").append(boolToStringResult(data.projectStats.sourcesCompile));
+        $(".testCompile").append(boolToStringResult(data.projectStats.testsCompile));
 
-        if(data[0].totalTestsRun == "0")
+        if(data.projectStats.totalTestsRun == "0")
         {
             $(".testTotal").append("0");
             $(".testPassed").append("N/A");
@@ -18,24 +18,16 @@ function getProjectStats() {
         }
         else
         {
-            var totalTests = data[0].totalTestsRun + data[0].totalTestsIgnored;
+            var totalTests = data.projectStats.totalTestsRun + data.projectStats.totalTestsIgnored;
             $(".testTotal").append(totalTests);
-            $(".testPassed").append(data[0].totalTestsPassed);
-            $(".testFailed").append(data[0].totalTestsFailed);
-            $(".testIgnored").append(data[0].totalTestsIgnored);
-            $(".testPassProgress").css("width", (data[0].totalTestsPassed/totalTests)*100 + "%");
-            $(".testFailProgress").css("width", (data[0].totalTestsFailed/totalTests)*100 + "%");
+            $(".testPassed").append(data.projectStats.totalTestsPassed);
+            $(".testFailed").append(data.projectStats.totalTestsFailed);
+            $(".testIgnored").append(data.projectStats.totalTestsIgnored);
+            $(".testPassProgress").css("width", (data.projectStats.totalTestsPassed/totalTests)*100 + "%");
+            $(".testFailProgress").css("width", (data.projectStats.totalTestsFailed/totalTests)*100 + "%");
         }
 
-        var sourceLineCount = [];
-        var testLineCount = [];
-        //todo: send the array through in json response rather than constructing on client side
-        for(i=0 ; i<data.length ; i++)
-        {
-            sourceLineCount[i] = data[i].sourceLineCount;
-            testLineCount[i] = data[i].testLineCount;
-        }
-        updateLineCountChart(sourceLineCount, testLineCount);
+        updateLineCountChart(data.sourceLineCounts, data.testLineCounts);
     });
 }
 

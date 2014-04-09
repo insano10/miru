@@ -1,6 +1,6 @@
 package com.insano10.miru;
 
-public class ProjectStats implements Comparable<ProjectStats>
+public class ProjectStatsCsvLine implements Comparable<ProjectStatsCsvLine>
 {
     private long timestamp;
     private boolean sourcesCompile;
@@ -12,12 +12,12 @@ public class ProjectStats implements Comparable<ProjectStats>
     private int sourceLineCount;
     private int testLineCount;
 
-    private ProjectStats()
+    private ProjectStatsCsvLine()
     {
     }
 
-    public ProjectStats(long timestamp, boolean sourcesCompile, boolean testsCompile, int totalTestsRun, int totalTestsPassed, int totalTestsFailed, int totalTestsIgnored,
-                        int sourceLineCount, int testLineCount)
+    public ProjectStatsCsvLine(long timestamp, boolean sourcesCompile, boolean testsCompile, int totalTestsRun, int totalTestsPassed, int totalTestsFailed, int totalTestsIgnored,
+                               int sourceLineCount, int testLineCount)
     {
         this.timestamp = timestamp;
         this.sourcesCompile = sourcesCompile;
@@ -30,7 +30,7 @@ public class ProjectStats implements Comparable<ProjectStats>
         this.testLineCount = testLineCount;
     }
 
-    public static ProjectStats fromCsvString(final String str)
+    public static ProjectStatsCsvLine fromCsvString(final String str)
     {
         String[] tokens = str.split(",");
         long timestamp = Long.parseLong(tokens[0].trim());
@@ -43,7 +43,22 @@ public class ProjectStats implements Comparable<ProjectStats>
         int sourceLineCount = Integer.valueOf(tokens[7].trim());
         int testLineCount = Integer.valueOf(tokens[8].trim());
 
-        return new ProjectStats(timestamp, sourcesCompile, testsCompile, totalTestsRun, totalTestsPassed, totalTestsFailed, totalTestsIgnored, sourceLineCount, testLineCount);
+        return new ProjectStatsCsvLine(timestamp, sourcesCompile, testsCompile, totalTestsRun, totalTestsPassed, totalTestsFailed, totalTestsIgnored, sourceLineCount, testLineCount);
+    }
+
+    public long getTimestamp()
+    {
+        return timestamp;
+    }
+
+    public int getSourceLineCount()
+    {
+        return sourceLineCount;
+    }
+
+    public int getTestLineCount()
+    {
+        return testLineCount;
     }
 
     private static boolean intToBool(final String integerString)
@@ -52,9 +67,9 @@ public class ProjectStats implements Comparable<ProjectStats>
     }
 
     @Override
-    public int compareTo(final ProjectStats o)
+    public int compareTo(final ProjectStatsCsvLine o)
     {
-        if(this.timestamp > o.timestamp)
+        if(this.timestamp < o.timestamp)
         {
             return -1;
         }
@@ -71,7 +86,7 @@ public class ProjectStats implements Comparable<ProjectStats>
     @Override
     public String toString()
     {
-        return "ProjectStats{" +
+        return "ProjectStatsCsvLine{" +
                 "timestamp=" + timestamp +
                 ", sourcesCompile=" + sourcesCompile +
                 ", testsCompile=" + testsCompile +
@@ -90,7 +105,7 @@ public class ProjectStats implements Comparable<ProjectStats>
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ProjectStats that = (ProjectStats) o;
+        ProjectStatsCsvLine that = (ProjectStatsCsvLine) o;
 
         if (sourceLineCount != that.sourceLineCount) return false;
         if (sourcesCompile != that.sourcesCompile) return false;

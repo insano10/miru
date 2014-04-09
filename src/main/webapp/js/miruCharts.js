@@ -9,8 +9,8 @@ var options = {
     {
         tickLength: 0,
         mode: "time",
-        timeformat: "%H:%M:%S",
-        minTickSize: [5, "minute"]
+        timeformat: "%H:%M",
+        minTickSize: [10, "second"]
     },
     grid:
     {
@@ -22,6 +22,10 @@ var options = {
         minTickSize: 1,
         tickDecimals: 0,
         tickFormatter: function(val, axis) { return val < axis.max ? val.toFixed(0) : "Line count";}
+    },
+    legend:
+    {
+        backgroundOpacity: 0
     }
 };
 
@@ -35,8 +39,8 @@ function initialiseLineCountChart()
 
 function updateLineCountChart(sourceDataPointArray, testDataPointArray)
 {
-    var sourceSeries = { label: "source lines", data : [[1397069754000,1],[1397069755000,2],[1397069756000,3]], shadowSize: 0, color: "rgba(151,187,205,1)"};
-    var testSeries = { label: "test lines", data : [[1397069754000,3],[1397069755000,2],[1397069756000,1]], shadowSize: 0, color: "rgba(220,220,220,1)"};
+    var sourceSeries = { label: "source lines", data : sourceDataPointArray, shadowSize: 0, color: "rgba(151,187,205,1)"};
+    var testSeries = { label: "test lines", data : testDataPointArray, shadowSize: 0, color: "rgba(180,180,180,1)"};
     var data = [sourceSeries, testSeries];
 
 
