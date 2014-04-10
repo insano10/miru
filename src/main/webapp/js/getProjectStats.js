@@ -4,6 +4,7 @@ function getProjectStats() {
     {
         $(".dataCell").html("");
 
+        $(".projectName").append(data.projectName);
         $(".sourceCompile").append(boolToStringResult(data.projectStats.sourcesCompile));
         $(".testCompile").append(boolToStringResult(data.projectStats.testsCompile));
 

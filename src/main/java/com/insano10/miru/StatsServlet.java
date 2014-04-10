@@ -53,7 +53,7 @@ public class StatsServlet extends HttpServlet
             testLineCounts[i][1] = stats.get(i).getTestLineCount();
         }
 
-        final ProjectStatsResponse response1 = new ProjectStatsResponse(stats.get(stats.size()-1), sourceLineCounts, testLineCounts);
+        final ProjectStatsResponse response1 = new ProjectStatsResponse("romanNumerals", stats.get(stats.size()-1), sourceLineCounts, testLineCounts);
 
         response.getWriter().println(gson.toJson(response1));
         response.setContentType("text/html");
