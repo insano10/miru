@@ -1,7 +1,9 @@
-package com.insano10.miru;
+package com.insano10.miru.servlets;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.insano10.miru.ProjectStatsCsvLine;
+import com.insano10.miru.ProjectStatsResponse;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;

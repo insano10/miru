@@ -4,12 +4,22 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
         version="2.5">
+    
     <servlet>
         <servlet-name>Stats</servlet-name>
-        <servlet-class>com.insano10.miru.StatsServlet</servlet-class>
+        <servlet-class>com.insano10.miru.servlets.StatsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MiruRedirect</servlet-name>
+        <servlet-class>com.insano10.miru.servlets.MiruRedirectServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>MiruRedirect</servlet-name>
+        <url-pattern>/index.html</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Stats</servlet-name>
-        <url-pattern>/stats</url-pattern>
+        <url-pattern>/miru/stats</url-pattern>
     </servlet-mapping>
 </web-app>
