@@ -4,4 +4,4 @@
 ./gather/scripts/gather.sh properties/miru.properties
 
 #start webapp (need to put in background
-java -jar web/jetty-runner.jar web/miru-web.war
+java -jar web/jetty-runner.jar web/miru-web.war -DmiruProperties=properties/miru.properties

@@ -8,16 +8,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class StatsServlet extends HttpServlet
 {
-    private static final String DATAFILE = "data/romanNumerals.csv";
+    private static final String PROJECT_NAME = getProjectName();
+    private static final String DATAFILE = "data/"+ PROJECT_NAME +".csv";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
@@ -53,7 +50,7 @@ public class StatsServlet extends HttpServlet
             testLineCounts[i][1] = stats.get(i).getTestLineCount();
         }
 
-        final ProjectStatsResponse response1 = new ProjectStatsResponse("romanNumerals", stats.get(stats.size()-1), sourceLineCounts, testLineCounts);
+        final ProjectStatsResponse response1 = new ProjectStatsResponse(PROJECT_NAME, stats.get(stats.size()-1), sourceLineCounts, testLineCounts);
 
         response.getWriter().println(gson.toJson(response1));
         response.setContentType("text/html");
@@ -63,5 +60,27 @@ public class StatsServlet extends HttpServlet
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
+    }
+
+    private static String getProjectName()
+    {
+        try
+        {
+            final String propertyFile = System.getProperty("miruProperties");
+            final Properties properties = new Properties();
+            properties.load(new FileInputStream(propertyFile));
+
+            final String projectName = properties.getProperty("projectName");
+
+            if(projectName == null || projectName.isEmpty())
+            {
+                throw new RuntimeException("projectName not found in miru property file: " + propertyFile);
+            }
+            return projectName;
+
+        } catch (Exception e)
+        {
+            throw new RuntimeException("Could not load miruProperties from system property.");
+        }
     }
 }
