@@ -1,84 +1,93 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Miru</title>
-    <script src="lib/js/jquery-2.1.0.min.js"></script>
-    <script src="lib/flot/jquery.flot.min.js"></script>
-    <script src="lib/flot/jquery.flot.time.min.js"></script>
-    <script src="lib/bootstrap-3.1.1/js/bootstrap.min.js"></script>
-    <script src="js/miruCharts.js"></script>
-    <script src="js/getProjectStats.js"></script>
+    <head>
+        <title>Miru</title>
+        <script src="lib/js/jquery-2.1.0.min.js"></script>
+        <script src="lib/flot/jquery.flot.min.js"></script>
+        <script src="lib/flot/jquery.flot.time.min.js"></script>
+        <script src="lib/bootstrap-3.1.1/js/bootstrap.min.js"></script>
+        <script src="js/miruCharts.js"></script>
+        <script src="js/getProjectStats.js"></script>
 
-    <link href="lib/bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/miru.css" rel="stylesheet">
+        <link href="lib/bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/miru.css" rel="stylesheet">
 
-    <link href="images/favicon.ico" rel="shortcut icon"/>
-</head>
-<body>
-<div class="navbar-default">
-    <div class="miru-header">
-        <img src="images/favicon.ico" height="40" width="40" style="margin-top: 5px; float:left">
-        <div style="font-weight:500; font-size: 32px">
-            Miru is watching: <span class="dataCell projectName"></span>
-        </div>
-    </div>
-</div>
-<br/>
-<div class="row row-left-border">
-
-    <div class="col-sm-3">
-        <div class="panel panel-default min-height">
-            <div class="panel-heading">
-                <h2 class="no-top-margin">Project Status</h2>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-8"><h4>Sources Compile</h4></div>
-                    <div class="col-md-4"><h4 class="dataCell sourceCompile"></h4></div>
+        <link href="images/miru.ico" rel="shortcut icon"/>
+    </head>
+    <body>
+        <div class="miru-header">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div style="width: 150px; margin: 0 auto">
+                        <img class="miru-header-content miru-header-img" src="images/miru.ico" height="30" width="30" style="float:left">
+                        <img class="miru-header-content miru-header-img" src="images/miru_title.png">
+                    </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-8"><h4>Tests Compile</h4></div>
-                    <div class="col-md-4"><h4 class="dataCell testCompile"></h4></div>
+                <div class="col-md-4">
+                    <button class="btn btn-md btn-default row-right-border miru-header-content" style="float:right">
+                        <span class="dataCell projectName"></span>
+                    </button>
                 </div>
             </div>
         </div>
-    </div>
+        <br/>
+        <div class="row row-left-border">
 
-    <div class="col-sm-3">
-        <div class="panel panel-default min-height">
-            <div class="panel-heading">
-                <h2 class="no-top-margin">Test Breakdown</h2>
-            </div>
-            <div class="panel-body">
-                <div class="progress">
-                    <div class="progress-bar progress-bar-success testPassProgress"></div>
-                    <div class="progress-bar progress-bar-danger testFailProgress"></div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-8"><h4>Total</h4></div>
-                    <div class="col-md-4"><h4 class="dataCell testTotal"></h4></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8"><h4>Passed</h4></div>
-                    <div class="col-md-4"><h4 class="dataCell testPassed"></h4></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8"><h4>Failed</h4></div>
-                    <div class="col-md-4"><h4 class="dataCell testFailed"></h4></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8"><h4>Ignored</h4></div>
-                    <div class="col-md-4"><h4 class="dataCell testIgnored"></h4></div>
+            <div class="col-sm-3">
+                <div class="panel panel-default min-height">
+                    <div class="panel-heading">
+                        <h2 class="no-top-margin">Project Status</h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-8"><h4>Sources Compile</h4></div>
+                            <div class="col-md-4"><h4 class="dataCell sourceCompile"></h4></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8"><h4>Tests Compile</h4></div>
+                            <div class="col-md-4"><h4 class="dataCell testCompile"></h4></div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <div class="col-sm-3">
+                <div class="panel panel-default min-height">
+                    <div class="panel-heading">
+                        <h2 class="no-top-margin">Test Breakdown</h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success testPassProgress"></div>
+                            <div class="progress-bar progress-bar-danger testFailProgress"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-8"><h4>Total</h4></div>
+                            <div class="col-md-4"><h4 class="dataCell testTotal"></h4></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8"><h4>Passed</h4></div>
+                            <div class="col-md-4"><h4 class="dataCell testPassed"></h4></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8"><h4>Failed</h4></div>
+                            <div class="col-md-4"><h4 class="dataCell testFailed"></h4></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8"><h4>Ignored</h4></div>
+                            <div class="col-md-4"><h4 class="dataCell testIgnored"></h4></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </div>
 
-</div>
-<div class="row row-left-border">
-    <div id="lineCountChart" style="width:800px;height:300px"></div>
-</div>
+        <div class="lineCountChart">
+            <div id="lineCountChart" style="width:800px;height:300px"></div>
+        </div>
 
-</body>
+    </body>
 </html>

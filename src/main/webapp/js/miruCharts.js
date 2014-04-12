@@ -14,7 +14,8 @@ var options = {
     },
     grid:
     {
-        borderColor: "rgba(220,220,220,1)"
+        borderColor: "rgba(220,220,220,1)",
+        backgroundColor: "rgba(255,255,255,1)"
     },
     yaxis:
     {
