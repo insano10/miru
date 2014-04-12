@@ -30,14 +30,6 @@ var options = {
     }
 };
 
-function initialiseLineCountChart()
-{
-    var sourceSeries = { label: "source lines", data : [], color: "rgba(151,187,205,1)"};
-    var testSeries = { label: "test lines", data : [], color: "rgba(220,220,220,1)"};
-    var data = [sourceSeries, testSeries];
-    $("#lineCountChart").plot(data, options);
-}
-
 function updateLineCountChart(sourceDataPointArray, testDataPointArray)
 {
     var sourceSeries = { label: "source lines", data : sourceDataPointArray, shadowSize: 0, color: "rgba(151,187,205,1)"};
@@ -47,7 +39,3 @@ function updateLineCountChart(sourceDataPointArray, testDataPointArray)
 
     $("#lineCountChart").plot(data, options);
 }
-
-$(document).ready(function(){
-    initialiseLineCountChart();
-})

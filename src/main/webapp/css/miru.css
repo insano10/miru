@@ -15,7 +15,7 @@
 
 .no-top-margin
 {
-    margin-top: 0px;
+    margin-top: 0;
 }
 
 .miru-header
@@ -34,9 +34,4 @@
 .miru-header-img
 {
     opacity: 0.5;
-}
-
-.lineCountChart
-{
-    margin-left: 20px;
 }
