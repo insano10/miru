@@ -1,6 +1,6 @@
 package com.insano10.miru;
 
-public class ProjectStatsCsvLine implements Comparable<ProjectStatsCsvLine>
+public class ProjectStatsCsvLine
 {
     private long timestamp;
     private boolean sourcesCompile;
@@ -11,10 +11,6 @@ public class ProjectStatsCsvLine implements Comparable<ProjectStatsCsvLine>
     private int totalTestsIgnored;
     private int sourceLineCount;
     private int testLineCount;
-
-    private ProjectStatsCsvLine()
-    {
-    }
 
     public ProjectStatsCsvLine(long timestamp, boolean sourcesCompile, boolean testsCompile, int totalTests, int totalTestsPassed, int totalTestsFailed, int totalTestsIgnored,
                                int sourceLineCount, int testLineCount)
@@ -64,23 +60,6 @@ public class ProjectStatsCsvLine implements Comparable<ProjectStatsCsvLine>
     private static boolean intToBool(final String integerString)
     {
         return !integerString.equals("0");
-    }
-
-    @Override
-    public int compareTo(final ProjectStatsCsvLine o)
-    {
-        if(this.timestamp < o.timestamp)
-        {
-            return -1;
-        }
-        else if(this.timestamp == o.timestamp)
-        {
-            return 0;
-        }
-        else
-        {
-            return 1;
-        }
     }
 
     @Override

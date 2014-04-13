@@ -4,10 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -37,27 +33,5 @@ public class ProjectStatsCsvLineTest
         final ProjectStatsCsvLine stats = ProjectStatsCsvLine.fromCsvString(csvString);
 
         assertThat(stats, equalTo(expectedStats));
-    }
-
-    @Test public void shouldSortStatsInAscendingOrder()
-    {
-        final List<ProjectStatsCsvLine> stats = new ArrayList<>();
-        ProjectStatsCsvLine stats1 = new ProjectStatsCsvLine(1L, true, true, 0, 0, 0, 0, 0, 0);
-        ProjectStatsCsvLine stats2 = new ProjectStatsCsvLine(3L, true, true, 0, 0, 0, 0, 0, 0);
-        ProjectStatsCsvLine stats3 = new ProjectStatsCsvLine(2L, true, true, 0, 0, 0, 0, 0, 0);
-
-        stats.add(stats1);
-        stats.add(stats2);
-        stats.add(stats3);
-
-        assertThat(stats.get(0), equalTo(stats1));
-        assertThat(stats.get(1), equalTo(stats2));
-        assertThat(stats.get(2), equalTo(stats3));
-
-        Collections.sort(stats);
-
-        assertThat(stats.get(0), equalTo(stats1));
-        assertThat(stats.get(1), equalTo(stats3));
-        assertThat(stats.get(2), equalTo(stats2));
     }
 }
