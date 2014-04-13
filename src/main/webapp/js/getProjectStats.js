@@ -5,10 +5,10 @@ function getProjectStats() {
         $(".dataCell").html("");
 
         $(".projectName").append(data.projectName);
-        $(".sourceCompile").append(boolToStringResult(data.projectStats.sourcesCompile));
-        $(".testCompile").append(boolToStringResult(data.projectStats.testsCompile));
+        $(".sourceCompile").append(boolToStringResult(data.sourcesCompile));
+        $(".testCompile").append(boolToStringResult(data.testsCompile));
 
-        if(data.projectStats.totalTestsRun == "0")
+        if(data.totalTestsRun == "0")
         {
             $(".testTotal").append("0");
             $(".testPassed").append("N/A");
@@ -19,12 +19,12 @@ function getProjectStats() {
         }
         else
         {
-            $(".testTotal").append(data.projectStats.totalTests);
-            $(".testPassed").append(data.projectStats.totalTestsPassed);
-            $(".testFailed").append(data.projectStats.totalTestsFailed);
-            $(".testIgnored").append(data.projectStats.totalTestsIgnored);
-            $(".testPassProgress").css("width", (data.projectStats.totalTestsPassed/data.projectStats.totalTests)*100 + "%");
-            $(".testFailProgress").css("width", (data.projectStats.totalTestsFailed/data.projectStats.totalTests)*100 + "%");
+            $(".testTotal").append(data.totalTests);
+            $(".testPassed").append(data.totalPassingTests);
+            $(".testFailed").append(data.totalFailingTests);
+            $(".testIgnored").append(data.totalIgnoredTests);
+            $(".testPassProgress").css("width", (data.totalPassingTests/data.totalTests)*100 + "%");
+            $(".testFailProgress").css("width", (data.totalFailingTests/data.totalTests)*100 + "%");
         }
 
         updateLineCountChart(data.sourceLineCounts, data.testLineCounts);

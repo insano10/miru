@@ -3,20 +3,17 @@ package com.insano10.miru.servlets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.insano10.miru.data.LineCountDataPoint;
+import com.insano10.miru.data.StatsResponse;
 import com.insano10.miru.serialisation.LineCountDataPointSerializer;
-import com.insano10.miru.ProjectStatsCsvLine;
-import com.insano10.miru.data.ProjectStatsResponse;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -24,43 +21,59 @@ public class StatsServlet extends HttpServlet
 {
     private static final String PROJECT_NAME = getProjectName();
     private static final String DATAFILE = "data/"+ PROJECT_NAME +".csv";
+    private static final Gson GSON = new GsonBuilder().registerTypeAdapter(LineCountDataPoint.class, new LineCountDataPointSerializer()).create();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        final Gson gson = new GsonBuilder().registerTypeAdapter(LineCountDataPoint.class, new LineCountDataPointSerializer()).create();
-
-        final List<ProjectStatsCsvLine> stats = new ArrayList<>();
-        final List<LineCountDataPoint> sourceLineCounts = new ArrayList<>();
-        final List<LineCountDataPoint> testLineCounts = new ArrayList<>();
-
         final File statsFile = new File(DATAFILE);
+        final StatsResponse statsResponse = buildResponse(statsFile);
 
-        try (Scanner fileReader = new Scanner(statsFile))
-        {
-            while (fileReader.hasNextLine())
-            {
-                final String line = fileReader.nextLine();
-
-                if (!line.startsWith("#"))
-                {
-                    ProjectStatsCsvLine statsLine = ProjectStatsCsvLine.fromCsvString(line);
-                    stats.add(statsLine);
-                    sourceLineCounts.add(new LineCountDataPoint(statsLine.getTimestamp(), statsLine.getSourceLineCount()));
-                    testLineCounts.add(new LineCountDataPoint(statsLine.getTimestamp(), statsLine.getTestLineCount()));
-                }
-            }
-        }
-
-        final ProjectStatsResponse response1 = new ProjectStatsResponse(PROJECT_NAME, stats.get(stats.size()-1), sourceLineCounts, testLineCounts);
-
-        response.getWriter().println(gson.toJson(response1));
+        response.getWriter().println(GSON.toJson(statsResponse));
         response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);
     }
 
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
+    private StatsResponse buildResponse(File statsFile) throws FileNotFoundException
+    {
+        final StatsResponse statsResponse = new StatsResponse();
+
+        try (Scanner fileReader = new Scanner(statsFile))
+        {
+            String line = "";
+
+            while (fileReader.hasNextLine())
+            {
+                line = fileReader.nextLine();
+
+                if (!line.startsWith("#"))
+                {
+                    String[] tokens = line.split(",");
+                    long timestamp = Long.parseLong(tokens[0].trim());
+                    int sourceLineCount = Integer.parseInt(tokens[7].trim());
+                    int testLineCount = Integer.parseInt(tokens[8].trim());
+
+
+                    statsResponse.sourceLineDataPoint(new LineCountDataPoint(timestamp, sourceLineCount));
+                    statsResponse.testLineDataPoint(new LineCountDataPoint(timestamp, testLineCount));
+                }
+            }
+
+            //last line in file
+            String[] tokens = line.split(",");
+            statsResponse.sourcesCompile(integerToBoolean(tokens[1].trim()));
+            statsResponse.testsCompile(integerToBoolean(tokens[2].trim()));
+            statsResponse.totalTests(Integer.valueOf(tokens[3].trim()));
+            statsResponse.totalPassingTests(Integer.valueOf(tokens[4].trim()));
+            statsResponse.totalFailingTests(Integer.valueOf(tokens[5].trim()));
+            statsResponse.totalIgnoredTests(Integer.valueOf(tokens[6].trim()));
+            statsResponse.projectName(PROJECT_NAME);
+        }
+        return statsResponse;
+    }
+
+    private boolean integerToBoolean(final String integerString)
+    {
+        return !integerString.equals("0");
     }
 
     private static String getProjectName()
