@@ -105,8 +105,11 @@ function saveDataToCSV()
         echo "#CSV format: sourceCompile, testCompile, totalTestsRun, totalTestsPass, totalTestsFail, totalTestsIgnored, sourceLineCount, testLineCount" > ${dataFile}
     fi
 
+    #add tests run to tests ignored for total test count
+    totalTests=$(($3+$6))
+
     #append data to project data file (3/4/5 all come from testRun)
-    echo "$(($(date +%s%N)/1000000)), $1, $2, $3, $4, $5, $6, $7, $8" >> ${dataFile}
+    echo "$(($(date +%s%N)/1000000)), $1, $2, $totalTests, $4, $5, $6, $7, $8" >> ${dataFile}
 }
 
 function main()

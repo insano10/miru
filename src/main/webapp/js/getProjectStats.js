@@ -19,13 +19,12 @@ function getProjectStats() {
         }
         else
         {
-            var totalTests = data.projectStats.totalTestsRun + data.projectStats.totalTestsIgnored;
-            $(".testTotal").append(totalTests);
+            $(".testTotal").append(data.projectStats.totalTests);
             $(".testPassed").append(data.projectStats.totalTestsPassed);
             $(".testFailed").append(data.projectStats.totalTestsFailed);
             $(".testIgnored").append(data.projectStats.totalTestsIgnored);
-            $(".testPassProgress").css("width", (data.projectStats.totalTestsPassed/totalTests)*100 + "%");
-            $(".testFailProgress").css("width", (data.projectStats.totalTestsFailed/totalTests)*100 + "%");
+            $(".testPassProgress").css("width", (data.projectStats.totalTestsPassed/data.projectStats.totalTests)*100 + "%");
+            $(".testFailProgress").css("width", (data.projectStats.totalTestsFailed/data.projectStats.totalTests)*100 + "%");
         }
 
         updateLineCountChart(data.sourceLineCounts, data.testLineCounts);

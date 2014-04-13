@@ -20,7 +20,7 @@ public class ProjectStatsCsvLineTest
         final Gson gson = new GsonBuilder().create();
         final ProjectStatsCsvLine stats = new ProjectStatsCsvLine(0L, true, true, 9, 7, 2, 4, 100, 85);
 
-        final String expectedJson = "{\"timestamp\":0,\"sourcesCompile\":true,\"testsCompile\":true,\"totalTestsRun\":9," +
+        final String expectedJson = "{\"timestamp\":0,\"sourcesCompile\":true,\"testsCompile\":true,\"totalTests\":9," +
                                      "\"totalTestsPassed\":7,\"totalTestsFailed\":2,\"totalTestsIgnored\":4," +
                                      "\"sourceLineCount\":100,\"testLineCount\":85}";
 
