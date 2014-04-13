@@ -1,38 +1,29 @@
-IntelliJ:
-1) Miru-build
-2) Miru-run
-3) Miru-gather
-4) http://localhost:8080/Miru
-
+Usage:
 
 Command Line with maven:
 1) mvn clean install jetty:run
-2) ./scripts/gather/gather.sh src/resources/miru.properties
-3) http://localhost:8080/Miru
+2) ./scripts/gather/start-gather.sh src/main/resources/miru.properties
+3) http://localhost:8080/miru
 
-From artifact:
-1) Unpack Miru.tar.gz
+From release artifact:
+1) Unpack Miru-1.0-SNAPSHOT-release.tar.gz
+2) set properties in properties/miru.properties
 2) ./miru-start-all.sh
-3) http://localhost:8080
-
-
-watch a project with:
-./scripts/gather.sh <path to miru.properties>
-
-start webapp with:
-java -jar web/jetty-runner.jar web/miru-web.war
-
+3) http://localhost:8080/miru
 
 
 tar.gz deployment structure:
 
 miru
 
--> miru-start-all.sh (script to start/stop/restart miru)
+-> miru-start-all.sh
+-> miru-stop-all.sh
 
--> gather
-  -> scripts
+-> scripts
+  -> gather
     -> gather.sh
+    -> start-gather.sh
+
 
 -> web
   -> jetty-runner.jar
