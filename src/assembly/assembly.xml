@@ -9,18 +9,22 @@
         <file>
             <source>${project.basedir}/scripts/miru-start-all.sh</source>
             <outputDirectory>/</outputDirectory>
+            <fileMode>0755</fileMode>
         </file>
         <file>
             <source>${project.basedir}/scripts/miru-stop-all.sh</source>
             <outputDirectory>/</outputDirectory>
+            <fileMode>0755</fileMode>
         </file>
         <file>
             <source>${project.basedir}/scripts/gather/gather.sh</source>
             <outputDirectory>scripts/gather</outputDirectory>
+            <fileMode>0755</fileMode>
         </file>
         <file>
             <source>${project.basedir}/scripts/gather/start-gather.sh</source>
             <outputDirectory>scripts/gather</outputDirectory>
+            <fileMode>0755</fileMode>
         </file>
         <file>
             <source>${project.build.directory}/${artifactId}-${version}.${packaging}</source>
