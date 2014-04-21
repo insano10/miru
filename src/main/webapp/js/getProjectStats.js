@@ -27,6 +27,11 @@ function getProjectStats() {
             $(".testFailProgress").css("width", (data.totalFailingTests/data.totalTests)*100 + "%");
         }
 
+        $(".modifiedFiles").append(data.modifiedFiles);
+        $(".addedFiles").append(data.addedFiles);
+        $(".deletedFiles").append(data.deletedFiles);
+        $(".unversionedFiles").append(data.unversionedFiles);
+
         updateLineCountChart(data.sourceLineCounts, data.testLineCounts);
     });
 }

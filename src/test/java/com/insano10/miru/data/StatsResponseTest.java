@@ -34,6 +34,11 @@ public class StatsResponseTest
         response.testLineDataPoint(new LineCountDataPoint(222L, 20));
         response.testLineDataPoint(new LineCountDataPoint(333L, 30));
 
+        response.modifiedFiles(2);
+        response.addedFiles(1);
+        response.deletedFiles(0);
+        response.unversionedFiles(5);
+
         final String expectedJson = "{" +
                 "\"projectName\":\"name\"," +
                 "\"sourcesCompile\":true," +
@@ -43,7 +48,11 @@ public class StatsResponseTest
                 "\"totalFailingTests\":1," +
                 "\"totalIgnoredTests\":2," +
                 "\"sourceLineCounts\":[[123,1],[456,2],[789,3]]," +
-                "\"testLineCounts\":[[111,10],[222,20],[333,30]]}";
+                "\"testLineCounts\":[[111,10],[222,20],[333,30]]," +
+                "\"modifiedFiles\":2," +
+                "\"addedFiles\":1," +
+                "\"deletedFiles\":0," +
+                "\"unversionedFiles\":5}";
 
         final String jsonStats = gson.toJson(response);
         assertThat(jsonStats, equalTo(expectedJson));

@@ -66,6 +66,10 @@ public class StatsServlet extends HttpServlet
             statsResponse.totalPassingTests(Integer.valueOf(tokens[4].trim()));
             statsResponse.totalFailingTests(Integer.valueOf(tokens[5].trim()));
             statsResponse.totalIgnoredTests(Integer.valueOf(tokens[6].trim()));
+            statsResponse.modifiedFiles(Integer.valueOf(tokens[9].trim()));
+            statsResponse.addedFiles(Integer.valueOf(tokens[10].trim()));
+            statsResponse.deletedFiles(Integer.valueOf(tokens[11].trim()));
+            statsResponse.unversionedFiles(Integer.valueOf(tokens[12].trim()));
             statsResponse.projectName(PROJECT_NAME);
         }
         return statsResponse;

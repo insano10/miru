@@ -19,6 +19,11 @@ public class StatsResponse
     private final List<LineCountDataPoint> sourceLineCounts = new ArrayList<>();
     private final List<LineCountDataPoint> testLineCounts = new ArrayList<>();
 
+    private int modifiedFiles;
+    private int addedFiles;
+    private int deletedFiles;
+    private int unversionedFiles;
+
     public StatsResponse projectName(String projectName)
     {
         this.projectName = projectName;
@@ -70,6 +75,28 @@ public class StatsResponse
     public StatsResponse testLineDataPoint(LineCountDataPoint dataPoint)
     {
         this.testLineCounts.add(dataPoint);
+        return this;
+    }
+
+    public StatsResponse modifiedFiles(int modifiedFiles)
+    {
+        this.modifiedFiles = modifiedFiles;
+        return this;
+    }
+
+    public StatsResponse addedFiles(int addedFiles)
+    {
+        this.addedFiles = addedFiles;
+        return this;
+    }
+    public StatsResponse deletedFiles(int deletedFiles)
+    {
+        this.deletedFiles = deletedFiles;
+        return this;
+    }
+    public StatsResponse unversionedFiles(int unversionedFiles)
+    {
+        this.unversionedFiles = unversionedFiles;
         return this;
     }
 }
