@@ -2,11 +2,14 @@ function getProjectStats() {
 
     $.getJSON( "stats", function( data )
     {
+        var sourcesCompile = boolToStringResult(data.sourcesCompile);
+        var testsCompile = boolToStringResult(data.testsCompile);
+
         $(".dataCell").html("");
 
         $(".projectName").append(data.projectName);
-        $(".sourceCompile").append(boolToStringResult(data.sourcesCompile));
-        $(".testCompile").append(boolToStringResult(data.testsCompile));
+        $(".sourceCompile").append(sourcesCompile);
+        $(".testCompile").append(sourcesCompile);
 
         if(data.totalTestsRun == "0")
         {
@@ -31,6 +34,10 @@ function getProjectStats() {
         $(".addedFiles").append(data.addedFiles);
         $(".deletedFiles").append(data.deletedFiles);
         $(".unversionedFiles").append(data.unversionedFiles);
+
+
+        var canCommit = (sourcesCompile == "OK" && testsCompile == "OK" && data.totalFailingTests == "0");
+        $(".canCommit").append(boolToStringResult(canCommit));
 
         updateLineCountChart(data.sourceLineCounts, data.testLineCounts);
     });
