@@ -62,7 +62,7 @@ function runTests()
     pass=0
     fail=0
 
-    if [[ ${resultStr} =~ .*OK\ \((.*)\ tests\).* ]]
+    if [[ ${resultStr} =~ .*OK\ \((.*)\ test.*\).* ]]
     then
         total=${BASH_REMATCH[1]};
         pass=${BASH_REMATCH[1]};
@@ -78,7 +78,8 @@ function runTests()
 
 function ignoredTests()
 {
-    echo $(grep -r "@Ignore" ${tests} | wc -l);
+    #exclude commented out annotations
+    echo $(grep -r "@Ignore" ${tests} | grep -v // | wc -l);
 }
 
 function countSourceLines()
