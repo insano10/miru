@@ -9,7 +9,7 @@ function getProjectStats() {
 
         $(".projectName").append(data.projectName);
         $(".sourceCompile").append(sourcesCompile);
-        $(".testCompile").append(sourcesCompile);
+        $(".testCompile").append(testsCompile);
 
         if(data.totalTestsRun == "0")
         {
