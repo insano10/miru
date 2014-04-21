@@ -11,7 +11,7 @@ function getProjectStats() {
         $(".sourceCompile").append(sourcesCompile);
         $(".testCompile").append(testsCompile);
 
-        if(data.totalTestsRun == "0")
+        if(testsCompile == "FAIL")
         {
             $(".testTotal").append("0");
             $(".testPassed").append("N/A");
