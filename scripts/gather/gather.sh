@@ -28,9 +28,11 @@ function sourceProperties()
     . $1
 
     echo "projectName=$projectName"
+    echo "projectRoot=$projectRoot"
     echo "sources=$sources"
     echo "tests=$tests"
     echo "classpath=$classpath"
+    echo "vcs=$vcs"
     echo ""
 }
 
@@ -90,6 +92,29 @@ function countTestLines()
     echo $(find ${tests} -name "*.java" | xargs cat | grep -v "^import" | egrep -v "^[[:space:]]*$|^#" | wc -l)
 }
 
+function vcsChanges()
+{
+    if [ "${vcs}" == "svn"  ]
+    then
+        modifiedFileCount=$(svn st ${projectRoot} | grep ^M | wc -l)
+        addedFileCount=$(svn st ${projectRoot} | grep ^A | wc -l)
+        deletedFileCount=$(svn st ${projectRoot} | grep ^D | wc -l)
+        unversionedFileCount=$(svn st ${projectRoot} | grep ^\? | wc -l)
+        echo "${modifiedFileCount} ${addedFileCount} ${deletedFileCount} ${unversionedFileCount}"
+
+    elif [ "${vcs}" == "hg" ]
+    then
+        modifiedFileCount=$(hg st ${projectRoot} | grep ^M | wc -l)
+        addedFileCount=$(hg st ${projectRoot} | grep ^A | wc -l)
+        deletedFileCount=$(hg st ${projectRoot} | grep ^R | wc -l)
+        unversionedFileCount=$(hg st ${projectRoot} | grep ^\? | wc -l)
+        echo "${modifiedFileCount} ${addedFileCount} ${deletedFileCount} ${unversionedFileCount}"
+    else
+        echo "Unsupported vcs property: ${vcs}"
+        exit 1
+    fi
+}
+
 function saveDataToCSV()
 {
     dataFolder="data"
@@ -102,14 +127,14 @@ function saveDataToCSV()
 
     #create data file with header if it doesn't exist
     if [ ! -f $dataFile ]; then
-        echo "#CSV format: sourceCompile, testCompile, totalTestsRun, totalTestsPass, totalTestsFail, totalTestsIgnored, sourceLineCount, testLineCount" > ${dataFile}
+        echo "#CSV format: sourceCompile, testCompile, totalTestsRun, totalTestsPass, totalTestsFail, totalTestsIgnored, sourceLineCount, testLineCount, filesModified, filesAdded, filesDeleted, unversionedFiles" > ${dataFile}
     fi
 
     #add tests run to tests ignored for total test count
     totalTests=$(($3+$6))
 
     #append data to project data file (3/4/5 all come from testRun)
-    echo "$(($(date +%s%N)/1000000)), $1, $2, $totalTests, $4, $5, $6, $7, $8" >> ${dataFile}
+    echo "$(($(date +%s%N)/1000000)), $1, $2, $totalTests, $4, $5, $6, $7, $8, $9, ${10}, ${11}, ${12}" >> ${dataFile}
 }
 
 function main()
@@ -124,8 +149,9 @@ function main()
     testRun=$(runTests ${buildDir})
     sourceLines=$(countSourceLines)
     testLines=$(countTestLines)
+    vcsChangeCounts=$(vcsChanges)
 
-    saveDataToCSV ${sourceCompile} ${testCompile} ${testRun} ${testsIgnored} ${sourceLines} ${testLines}
+    saveDataToCSV ${sourceCompile} ${testCompile} ${testRun} ${testsIgnored} ${sourceLines} ${testLines} ${vcsChangeCounts}
 
     echo "Results"
     echo "--------"
@@ -135,6 +161,7 @@ function main()
     echo "tests ignored:  $testsIgnored"
     echo "source lines:   $sourceLines"
     echo "test lines:     $testLines"
+    echo "vcs changes:    $vcsChangeCounts"
 }
 
 if [ "$#" -ne 1 ]; then
