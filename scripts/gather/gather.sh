@@ -79,7 +79,7 @@ function runTests()
 function ignoredTests()
 {
     #exclude commented out annotations
-    echo $(grep -r "@Ignore" ${tests} | grep -v // | wc -l);
+    echo $(find ${tests} -name "*Test.java" | xargs grep "@Ignore" | grep -v // | wc -l);
 }
 
 function countSourceLines()
