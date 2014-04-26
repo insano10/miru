@@ -1,9 +1,9 @@
 #!/bin/bash
 
-#gather stats every 10 seconds
+#gather stats every 5 seconds
 while true;
 do
-    sleep 10
+    sleep 5
     ./scripts/gather/gather.sh $1
 
 done

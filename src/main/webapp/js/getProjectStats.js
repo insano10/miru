@@ -55,4 +55,4 @@ function boolToStringResult(boolResult)
     }
 }
 
-setInterval(function () { getProjectStats() }, 1000);
+setInterval(function () { getProjectStats() }, 2000);
