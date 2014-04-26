@@ -16,8 +16,8 @@ public class StatsResponse
     private int totalFailingTests;
     private int totalIgnoredTests;
 
-    private final List<LineCountDataPoint> sourceLineCounts = new ArrayList<>();
-    private final List<LineCountDataPoint> testLineCounts = new ArrayList<>();
+    private List<LineCountDataPoint> sourceLineCounts = new ArrayList<>();
+    private List<LineCountDataPoint> testLineCounts = new ArrayList<>();
 
     private int modifiedFiles;
     private int addedFiles;
@@ -89,14 +89,25 @@ public class StatsResponse
         this.addedFiles = addedFiles;
         return this;
     }
+
     public StatsResponse deletedFiles(int deletedFiles)
     {
         this.deletedFiles = deletedFiles;
         return this;
     }
+
     public StatsResponse unversionedFiles(int unversionedFiles)
     {
         this.unversionedFiles = unversionedFiles;
         return this;
+    }
+
+    public void trimDataPoints(int maxPoints)
+    {
+        int maxSource = sourceLineCounts.size() - 1;
+        sourceLineCounts = sourceLineCounts.subList(Math.max(0, maxSource - maxPoints), maxSource);
+
+        int maxTest = testLineCounts.size() - 1;
+        testLineCounts = testLineCounts.subList(Math.max(0, maxTest - maxPoints), maxTest);
     }
 }

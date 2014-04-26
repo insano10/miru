@@ -71,6 +71,9 @@ public class StatsServlet extends HttpServlet
             statsResponse.deletedFiles(Integer.valueOf(tokens[11].trim()));
             statsResponse.unversionedFiles(Integer.valueOf(tokens[12].trim()));
             statsResponse.projectName(PROJECT_NAME);
+
+            //only display the most recent 500 data points
+            statsResponse.trimDataPoints(500);
         }
         return statsResponse;
     }
