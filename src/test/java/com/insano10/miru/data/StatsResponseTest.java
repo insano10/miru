@@ -39,6 +39,7 @@ public class StatsResponseTest
         response.deletedFiles(0);
         response.unversionedFiles(5);
 
+
         final String expectedJson = "{" +
                 "\"projectName\":\"name\"," +
                 "\"sourcesCompile\":true," +
