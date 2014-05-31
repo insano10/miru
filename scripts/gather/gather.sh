@@ -110,6 +110,10 @@ function vcsChanges()
         deletedFileCount=$(hg st ${projectRoot} | grep ^R | wc -l)
         unversionedFileCount=$(hg st ${projectRoot} | grep ^\? | wc -l)
         echo "${modifiedFileCount} ${addedFileCount} ${deletedFileCount} ${unversionedFileCount}"
+    elif [ "${vcs}" == "git" ]
+    then
+        echo "Need to implement git support!"
+        exit 1
     else
         echo "Unsupported vcs property: ${vcs}"
         exit 1
