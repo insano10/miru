@@ -34,7 +34,82 @@
           <h1>
 <a id="miru" class="anchor" href="#miru" aria-hidden="true"><span class="octicon octicon-link"></span></a>miru</h1>
 
-<p>Continuous monitoring for coding dojo sessions</p>
+<p>Miru is a tool to monitor the progress of Java based coding dojo sessions.</p>
+
+<p><img src="https://raw.githubusercontent.com/insano10/miru/master/docs/miru_dash.png" alt=""></p>
+
+<p>It comprises of a set of scripts that continuously monitor the status of the project directory and a web front end to visualise progress</p>
+
+<h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h1>
+
+<p>miru can be run either from the command line or from within IntelliJ IDEA</p>
+
+<h2>
+<a id="command-line---release-tar" class="anchor" href="#command-line---release-tar" aria-hidden="true"><span class="octicon octicon-link"></span></a>Command line - release tar</h2>
+
+<ol>
+<li>Download Miru-1.0-SNAPSHOT-release.tar.gz</li>
+<li>Unpack the tar with 'tar zxvf Miru-1.0-SNAPSHOT-release.tar.gz'</li>
+<li>configure your project properties in properties/miru.properties</li>
+<li>./miru-start-all.sh</li>
+<li>http://localhost:8080/miru</li>
+</ol>
+
+<h2>
+<a id="command-line---intellij-idea-project" class="anchor" href="#command-line---intellij-idea-project" aria-hidden="true"><span class="octicon octicon-link"></span></a>Command line - IntelliJ IDEA project</h2>
+
+<ol>
+<li>Navigate to the root of the miru project directory</li>
+<li>configure your project properties in src/main/resources/miru.properties</li>
+<li>mvn clean install jetty:run</li>
+<li>./scripts/gather/start-gather.sh src/main/resources/miru.properties</li>
+<li>http://localhost:8080/miru</li>
+</ol>
+
+<h2>
+<a id="from-intellij-idea" class="anchor" href="#from-intellij-idea" aria-hidden="true"><span class="octicon octicon-link"></span></a>From IntelliJ IDEA</h2>
+
+<p>Create run configurations for the scripts and front end</p>
+
+<ul>
+<li>Scripts
+
+<ol>
+<li>Create a new bash run configuration called 'start-gather'</li>
+<li>Script = /home/jenny/code/miru/scripts/gather/start-gather.sh</li>
+<li>Program Arguments = src/main/resources/miru.properties</li>
+</ol>
+</li>
+<li>Front end
+
+<ol>
+<li>Create a new maven run configuration called 'front-end'</li>
+<li>Command line = clean install jetty:run -DmiruProperties=src/main/resources/miru.properties</li>
+<li>configure your project properties in src/main/resources/miru.properties</li>
+<li>Run 'start-gather' to start collecting data into the data/ directory</li>
+<li>Run 'front-end' to start the web app on port 8080</li>
+</ol>
+</li>
+</ul>
+
+<h1>
+<a id="project-properties" class="anchor" href="#project-properties" aria-hidden="true"><span class="octicon octicon-link"></span></a>Project Properties</h1>
+
+<ul>
+<li>projectName   - the name of your project. This can have any value</li>
+<li>projectRoot   - the absolute path to the root of the project you want to monitor</li>
+<li>sources       - the absolute path to the directory containing the Java sources of the project. This will typically be projectRoot/src/main/java</li>
+<li>tests         - the absolute path to the directory containing the unit tests of the project. This will typically be projectRoot/src/test/java</li>
+<li>classpath     - the absolute path to the directory containing all dependencies required by the project to run. This may be projectRoot/lib/*</li>
+<li>vcs           - the version control system used by the project. miru currently supports svn, git and hg</li>
+</ul>
+
+<h1>
+<a id="rebuilding-the-release-tar" class="anchor" href="#rebuilding-the-release-tar" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rebuilding the release tar</h1>
+
+<p>The project comes with a maven assembly configuration in src/assembly/assembly.xml which can be used to recreate the miru
+tar with maven target 'assembly:assembly'</p>
         </section>
 
         <footer>
