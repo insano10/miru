@@ -3,6 +3,8 @@
 
 Miru is a tool to monitor the progress of Java based coding dojo sessions.
 
+![](https://raw.githubusercontent.com/insano10/miru/master/docs/miru_dash.png)
+
 It comprises of a set of scripts that continuously monitor the status of the project directory and a web front end to visualise progress
 
 
@@ -12,8 +14,8 @@ miru can be run either from the command line or from within IntelliJ IDEA
 
 ## Command line - release tar
 
-1. Download Miru-1.0-SNAPSHOT-release.tar.gz
-1. Unpack the tar with 'tar zxvf Miru-1.0-SNAPSHOT-release.tar.gz'
+1. Download the latest miru release tar.gz
+1. Unpack the tar
 1. configure your project properties in properties/miru.properties
 1. ./miru-start-all.sh
 1. http://localhost:8080/miru
