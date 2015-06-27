@@ -112,8 +112,11 @@ function vcsChanges()
         echo "${modifiedFileCount} ${addedFileCount} ${deletedFileCount} ${unversionedFileCount}"
     elif [ "${vcs}" == "git" ]
     then
-        echo "Need to implement git support!"
-        exit 1
+       modifiedFileCount=$(git -C ${projectRoot} ls-files -m | wc -l)
+       addedFileCount=$(git -C ${projectRoot} status | grep 'new file:' | wc -l)
+       deletedFileCount=$(git -C ${projectRoot} status | grep 'deleted:' | wc -l)
+       unversionedFileCount=$(git -C ${projectRoot} ls-files --others --exclude-standard | wc -l)
+       echo "${modifiedFileCount} ${addedFileCount} ${deletedFileCount} ${unversionedFileCount}"
     else
         echo "Unsupported vcs property: ${vcs}"
         exit 1
